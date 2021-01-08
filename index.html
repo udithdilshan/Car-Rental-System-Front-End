@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Easy Car Rental</title>
+    <link rel="icon" type="image/png" href="asset/img/car-solid.svg"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+          integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link href="asset/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="asset/css/profile.css">
+
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+        <a class="navbar-brand" href="#" onclick="loadMain()"><i class="mr-3 fas fa-car"></i>Easy Car Rental</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Category
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+            <span id="btnRegistration" class="nav-item mr-4">
+                <a class="nav-link btn btn-success" href="#" data-toggle="modal"
+                   data-target="#Register">Register</a>
+            </span>
+            <span id="btnAccount" class="nav-item pr-lg-5">
+                <a class="nav-link btn btn-outline-success" href="#" data-toggle="modal"
+                   data-target="#LogIn">Log In</a>
+            </span>
+
+            <span id="btnSignOut" class="nav-item pr-lg-5">
+                    <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+            </span>
+        </div>
+    </nav>
+</header>
+
+<div id="profile" class="container mt-5">
+    <div class="row mt-5">
+        <div class="col-md-4 mt-5">
+            <div class="profile-info-left">
+                <div class="section mt-5">
+                    <h3>Profile</h3>
+                    <div class="mt-4">
+                        <h5 id="userName"></h5>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <button id="btnVerify" type="button" class="btn btn-lg btn-primary" data-toggle="modal"
+                            data-target=".bd-example-modal-lg" onclick="setUserDetail()">Verify Profile
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 mt-3">
+            <div class="profile-info-right">
+
+                <ul class="nav nav-pills nav-pills-custom-minimal custom-minimal-bottom">
+                    <li id="all_tab" class="active"><a href="#all" data-toggle="tab">All Rent</a></li>
+                    <li id="ongoing_tab"> <a href="#ongoing" data-toggle="tab">OnGoing</a></li>
+                    <li id="canceled_tab"><a href="#canceled" data-toggle="tab">Canceled</a></li>
+                </ul>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane fade in active" id="all">
+                        <h1>All</h1>
+                    </div>
+
+                    <div class="tab-pane fade" id="ongoing">
+                        <h1>On</h1>
+                    </div>
+
+                    <div class="tab-pane fade" id="canceled">
+                        <h1>Cancel</h1>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="verifyProfile" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-signin">
+
+                        <div class="modal-header mb-3">
+                            <h1 class="h3 mb-3 font-weight-bold">Verify Profile</h1>
+                            <button type="button" id="btnClose" class="btn btn-lg btn-outline-danger close"
+                                    data-dismiss="modal"
+                                    aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
+                        </div>
+                        <div id="customerUpdated" class="alert alert-success ">
+                            <p>Update Successful!</p>
+                        </div>
+                        <fieldset disabled>
+                            <label for="updateName" class="sr-only">Name</label>
+                            <input type="text" id="updateName" class="form-control disabled" placeholder="Name*">
+                            <div class="invalid-feedback">
+                                Please enter Name.
+                            </div>
+                            <label for="updateEmail" class="sr-only">Email address</label>
+                            <input type="email" id="updateEmail" class="form-control disabled" placeholder="Email*">
+
+                            <div class="invalid-feedback">
+                                Please enter valid Email.
+                            </div>
+
+                            <label for="updateAddress" class="sr-only">Address</label>
+                            <input type="text" id="updateAddress" class="form-control disabled" placeholder="Address*">
+
+                            <div class="invalid-feedback">
+                                Please enter Address.
+                            </div>
+
+                            <label for="updateContact" class="sr-only">Contact Number</label>
+                            <input type="number" id="updateContact" class="form-control disabled"
+                                   placeholder="Contact Number*">
+
+                            <div class="invalid-feedback">
+                                Please enter Contact Number.
+                            </div>
+                        </fieldset>
+
+                        <label for="updateNIC" class="sr-only">NIC</label>
+                        <input type="text" id="updateNIC" class="form-control disabled" placeholder="NIC*">
+
+                        <div class="invalid-feedback">
+                            Please enter NIC.
+                        </div>
+                        <div class="container mb-2">
+                            <div class="row">
+                                <div class="col-lg-6 mt-3 mb-3">
+                                    <label for="nicPic1">NIC (Front)</label><br>
+                                    <input type="file" id="nicPic1">
+                                    <div id="in-nic1" class="invalid-feedback">
+                                        Please Choose NIC Front.
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 mt-3 mb-3">
+                                    <label for="nicPic2">NIC (Back)</label><br>
+                                    <input type="file" id="nicPic2">
+                                    <div id="in-nic2" class="invalid-feedback">
+                                        Please Choose NIC Back.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <label for="updateLicence" class="sr-only">Driving License No.</label>
+                        <input type="text" id="updateLicence" class="form-control disabled"
+                               placeholder="Driving License No.*">
+
+                        <div class="invalid-feedback">
+                            Please enter Driving License No.
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 mt-3 mb-3">
+                                    <label for="drivingLicencePic1">Driving License (Front)</label><br>
+                                    <input type="file" id="drivingLicencePic1">
+                                    <div id="in-drivingLicencePic1" class="invalid-feedback">
+                                        Please Choose Driving License Front.
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 mt-3 mb-3">
+                                    <label for="drivingLicencePic2">Driving License (Back)</label><br>
+                                    <input type="file" id="drivingLicencePic2">
+                                    <div id="in-drivingLicencePic2" class="invalid-feedback">
+                                        Please Choose Driving License Back.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="updateCustomerDetails()" class="btn btn-lg btn-primary btn-block"
+                                type="button">Update
+                        </button>
+                        <p class="mt-5 text-muted">&copy; 2020-Easy Car Rental</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<main id="main" role="main">
+
+    <div class="modal fade" id="Register" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <div class="form-signin">
+
+                        <div class="modal-header mb-3">
+                            <h1 class="h3 mb-3 font-weight-bold">Register</h1>
+                            <button type="button" id="signInClose" class="btn btn-lg btn-outline-danger close"
+                                    data-dismiss="modal"
+                                    aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
+                        </div>
+                        <div id="customerSaved" class="alert alert-success">
+                            <p>Registration Successful !</p>
+                        </div>
+                        <div id="existEmail" class="alert alert-danger">
+                            <p>User already exist by this Email !</p>
+                        </div>
+                        <label for="inputName" class="sr-only">Name</label>
+                        <input type="text" id="inputName" class="form-control" placeholder="Name*">
+                        <div class="invalid-feedback">
+                            Please enter Name.
+                        </div>
+                        <label for="inputEmail" class="sr-only">Email address</label>
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Email*">
+
+                        <div class="invalid-feedback">
+                            Please enter valid Email.
+                        </div>
+
+                        <label for="inputAddress" class="sr-only">Address</label>
+                        <input type="text" id="inputAddress" class="form-control" placeholder="Address*">
+
+                        <div class="invalid-feedback">
+                            Please enter Address.
+                        </div>
+
+                        <label for="inputContact" class="sr-only">Contact Number</label>
+                        <input type="number" id="inputContact" class="form-control" placeholder="Contact Number*">
+
+                        <div class="invalid-feedback">
+                            Please enter Contact Number.
+                        </div>
+
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Password">
+                        <div class="invalid-feedback">
+                            Please enter Password.
+                        </div>
+
+                        <label for="inputPasswordConfirm" class="sr-only">Confirm Password</label>
+                        <input type="password" id="inputPasswordConfirm" class="form-control"
+                               placeholder="Confirm Password">
+                        <div class="invalid-feedback mb-3">
+                            Passwords doesn't match.
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block" type="button" onclick="saveUser()">Sign in
+                        </button>
+
+                        <p class="mt-5 text-muted">&copy; 2020-Easy Car Rental</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="LogIn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-header">
+                        <h1 class="h3 mb-3 font-weight-bold">Log In</h1>
+                        <button type="button" class="btn btn-lg btn-outline-danger close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="form-signin">
+                        <div id="incorrect" class="alert alert-danger">
+                            <p>Password or Email Incorrect !</p>
+                        </div>
+                        <label for="inputLogInEmail" class="sr-only">Email address</label>
+                        <input type="email" id="inputLogInEmail" class="form-control" placeholder="Email address"
+                               required>
+
+                        <div class="invalid-feedback">
+                            Please enter valid Email.
+                        </div>
+
+                        <label for="inputLogInPassword" class="sr-only">Password</label>
+                        <input type="password" id="inputLogInPassword" class="form-control" placeholder="Password"
+                               required>
+
+                        <div class="invalid-feedback mb-3">
+                            Please enter Password.
+                        </div>
+
+                        <button class="btn btn-lg btn-primary btn-block" type="button" onclick="logIn()">Log in</button>
+                        <p class="mt-5 mb-3 text-muted">&copy; 2020-Easy Car Rental</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="first-slide"
+                     src="asset/img/Car-Rentals-in-India.jpg"
+                     alt="First slide">
+                <div class="container">
+                    <div class="carousel-caption text-left">
+                        <h1>Easy Car Rental</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="second-slide"
+                     src="asset/img/best-car-rentals.jpg"
+                     alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img class="third-slide"
+                     src="asset/img/xtrail-d.jpg"
+                     alt="Third slide">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+</main>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+        integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script src="js/Main.js"></script>
+<script src="js/Registration.js"></script>
+<script src="js/LogIn.js"></script>
+<script src="js/Profile.js"></script>
+</body>
+</html>
